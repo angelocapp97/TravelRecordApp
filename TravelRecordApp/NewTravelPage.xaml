@@ -4,7 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TravelRecordApp.NewTravelPage">
 
-    <StackLayout>
-        <Label Text="Welcome to New Travel page" />
-    </StackLayout>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save"
+                     Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="experienceEntry"
+                   Placeholder="Write your experience"/>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
