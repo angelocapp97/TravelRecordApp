@@ -4,7 +4,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TravelRecordApp.ProfilePage">
 
-    <StackLayout>
-        <Label Text="Welcome to Profile page" />
+    <StackLayout Margin="20,40,20,0">
+        <Label x:Name="postCountLabel"
+               HorizontalOptions="Center"
+               TextColor="DodgerBlue"
+               FontAttributes="Bold"/>
+
+        <Label Text="Posts"
+               HorizontalOptions="Center"
+               TextColor="LightGray"/>
+
+        <ListView x:Name="categoriesListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Path=Key}"
+                              Detail="{Binding Path=Value}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </ContentPage>
