@@ -4,6 +4,8 @@ using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using SQLite;
+using TravelRecordApp.Model;
 using Xamarin.Forms;
 
 namespace TravelRecordApp
@@ -65,14 +67,49 @@ namespace TravelRecordApp
             }
                 
             GetLocation();
+
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                conn.CreateTable<Post>();
+                var posts = conn.Table<Post>().ToList();
+                DisplayInMap(posts);
+            }
         }
 
-        protected override void OnDisappearing()
+        private void DisplayInMap(List<Post> posts)
+        {
+            foreach(var post in posts)
+            {
+                try
+                {
+                    var pin = new Xamarin.Forms.Maps.Pin()
+                    {
+                        Type = Xamarin.Forms.Maps.PinType.SavedPin,
+                        Position = new Xamarin.Forms.Maps.Position(post.Latitude, post.Longitude),
+                        Label = post.VenueName,
+                        Address = post.Address
+                    };
+
+                    locationsMap.Pins.Add(pin);
+                }
+                catch(NullReferenceException nre)
+                {
+
+                }
+                catch(Exception ex)
+                {
+
+                }
+            }
+        }
+
+        protected override async void OnDisappearing()
         {
             base.OnDisappearing();
 
-            CrossGeolocator.Current.StopListeningAsync();
-            CrossGeolocator.Current.PositionChanged -= Locator_PositionChanged;
+            var locator = CrossGeolocator.Current;
+            locator.PositionChanged -= Locator_PositionChanged;
+            await locator.StopListeningAsync();
         }
 
         private void Locator_PositionChanged(object sender, PositionEventArgs e)
