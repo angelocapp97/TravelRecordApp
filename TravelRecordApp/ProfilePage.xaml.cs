@@ -18,32 +18,13 @@ namespace TravelRecordApp
         {
             base.OnAppearing();
 
-            using(SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                var postTable = conn.Table<Post>().ToList();
+            //var postTable = conn.Table<Post>().ToList();
 
-                var categories = postTable
-                    .OrderBy(x => x.CategoryId)
-                    .Select(x => x.CategoryName)
-                    .Distinct().ToList();
+            var posts = Post.GetAll();
 
-                Dictionary<string, int> categoriesCount = new Dictionary<string, int>();
-                foreach(var category in categories)
-                {
-                    var count = postTable
-                        .Where(x => x.CategoryName == category)
-                        .ToList().Count();
+            categoriesListView.ItemsSource = Post.GetCategoriesCount(posts);
 
-                    if (category == null)
-                        categoriesCount.Add(string.Empty, count);
-                    else
-                        categoriesCount.Add(category, count);
-                }
-
-                categoriesListView.ItemsSource = categoriesCount;
-
-                postCountLabel.Text = postTable.Count.ToString();
-            }
+            postCountLabel.Text = posts.Count.ToString();
         }
     }
 }

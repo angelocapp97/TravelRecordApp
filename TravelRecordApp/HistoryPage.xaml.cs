@@ -17,12 +17,8 @@ namespace TravelRecordApp
         {
             base.OnAppearing();
 
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Post>();
-                var posts = conn.Table<Post>().ToList();
-                postListView.ItemsSource = posts;
-            }
+            var posts = Post.GetAll();
+            postListView.ItemsSource = posts;
         }
 
         void Handle_ItemSelected(object sender, SelectedItemChangedEventArgs e)

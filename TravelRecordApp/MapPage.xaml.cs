@@ -68,12 +68,8 @@ namespace TravelRecordApp
                 
             GetLocation();
 
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Post>();
-                var posts = conn.Table<Post>().ToList();
-                DisplayInMap(posts);
-            }
+            var posts = Post.GetAll();
+            DisplayInMap(posts);
         }
 
         private void DisplayInMap(List<Post> posts)

@@ -23,30 +23,22 @@ namespace TravelRecordApp
         {
             selectedPost.Experience = experienceEntry.Text;
 
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Post>();
-                int rows = conn.Update(selectedPost);
+            int rows = Post.Update(selectedPost);
 
-                if (rows > 0)
-                    DisplayAlert("Success", "Experience updated successfully", "Ok");
-                else
-                    DisplayAlert("Error", "No experience updated", "Ok");
-            }
+            if (rows > 0)
+                DisplayAlert("Success", "Experience updated successfully", "Ok");
+            else
+                DisplayAlert("Error", "No experience updated", "Ok");
         }
 
         void DeleteButton_Clicked(object sender, EventArgs e)
         {
-            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Post>();
-                int rows = conn.Delete(selectedPost);
+            int rows = Post.Delete(selectedPost);
 
-                if (rows > 0)
-                    DisplayAlert("Success", "Experience deleted successfully", "Ok");
-                else
-                    DisplayAlert("Error", "No experience deleted", "Ok");
-            }
+            if (rows > 0)
+                DisplayAlert("Success", "Experience deleted successfully", "Ok");
+            else
+                DisplayAlert("Error", "No experience deleted", "Ok");
         }
     }
 }
