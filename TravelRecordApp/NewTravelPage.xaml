@@ -21,8 +21,7 @@
                       HorizontalOptions="FillAndExpand"
                       Margin="20,0"
                       ItemsSource="{Binding Venues}"
-                      SelectedItem="{Binding SelectedVenue, Mode=TwoWay}"
-                      SelectionMode="Single">
+                      SelectedItem="{Binding SelectedVenue, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
