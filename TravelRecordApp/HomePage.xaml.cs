@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using TravelRecordApp.ViewModel;
 using Xamarin.Forms;
 
 namespace TravelRecordApp
 {
     public partial class HomePage : TabbedPage
     {
+        HomeViewModel viewModel;
+
         public HomePage()
         {
             InitializeComponent();
-        }
 
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new NewTravelPage());
+            viewModel = new HomeViewModel();
+            BindingContext = viewModel;
         }
     }
 }

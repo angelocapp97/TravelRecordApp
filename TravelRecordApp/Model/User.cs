@@ -3,43 +3,18 @@ using System.ComponentModel;
 
 namespace TravelRecordApp.Model
 {
-    public class User : INotifyPropertyChanged
+    public class User
     {
-        private string email;
-        public string Email
-        {
-            get { return email; }
-            set
-            {
-                email = value;
-                OnPropertyChanged(nameof(Email));
-            }
-        }
+        public string Email { get; set; }
 
-        private string password;
-        public string Password
-        {
-            get { return password; }
-            set
-            {
-                password = value;
-                OnPropertyChanged(nameof(Password));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public string Password { get; set; }
 
         public static bool Login(User user)
         {
-            bool isEmailEmpty = string.IsNullOrWhiteSpace(user.Email);
-            bool isPasswordEmpty = string.IsNullOrWhiteSpace(user.Password);
+            if (user.Email == "asd@asd" && user.Password == "asdasd")
+                return true;
 
-            return !isEmailEmpty && !isPasswordEmpty;
+            return false;
         }
     }
 }

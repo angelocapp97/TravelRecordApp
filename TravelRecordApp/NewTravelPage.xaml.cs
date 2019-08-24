@@ -4,31 +4,37 @@ using System.Linq;
 using Plugin.Geolocator;
 using SQLite;
 using TravelRecordApp.Model;
+using TravelRecordApp.ViewModel;
 using Xamarin.Forms;
 
 namespace TravelRecordApp
 {
     public partial class NewTravelPage : ContentPage
     {
+        NewTravelViewModel viewModel;
+
         Post post;
         public NewTravelPage()
         {
             InitializeComponent();
+
+            viewModel = new NewTravelViewModel();
+            BindingContext = viewModel;
         }
 
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
+        //protected override async void OnAppearing()
+        //{
+        //    base.OnAppearing();
 
-            post = new Post();
-            containerStackLayout.BindingContext = post;
+        //    post = new Post();
+        //    containerStackLayout.BindingContext = post;
 
-            var locator = CrossGeolocator.Current;
-            var position = await locator.GetPositionAsync();
+        //    var locator = CrossGeolocator.Current;
+        //    var position = await locator.GetPositionAsync();
 
-            var venues = await Venue.GetVenues(position.Latitude, position.Longitude);
-            venueListView.ItemsSource = venues;
-        }
+        //    var venues = await Venue.GetVenues(position.Latitude, position.Longitude);
+        //    venueListView.ItemsSource = venues;
+        //}
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {

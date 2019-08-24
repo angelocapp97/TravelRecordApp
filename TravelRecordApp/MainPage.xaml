@@ -10,17 +10,18 @@
                  VerticalOptions="Center"
                  Margin="20">
         <Entry x:Name="emailEntry"
-               Text="{Binding Email}"
+               Text="{Binding Email, Mode=TwoWay}"
                Placeholder="Email address"
                Keyboard="Email"/>
         <Entry x:Name="passwordEntry"
-               Text="{Binding Password}"
+               Text="{Binding Password, Mode=TwoWay}"
                Placeholder="Password"
                IsPassword="True"/>
         <Button x:Name="LoginButton"
                 Margin="0,50"
                 Text="Log in"
-                Clicked="LoginButton_Clicked"
+                Command="{Binding LoginCommand}"
+                CommandParameter="{Binding User}"
                 Style="{StaticResource normalButton}"/>
     </StackLayout>
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelRecordApp.Model;
+using TravelRecordApp.ViewModel;
 using Xamarin.Forms;
 
 namespace TravelRecordApp
@@ -14,27 +15,13 @@ namespace TravelRecordApp
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        User user;
+        MainViewModel viewModel;
         public MainPage()
         {
             InitializeComponent();
 
-            user = new User();
-            containerStackLayout.BindingContext = user;
-        }
-
-        private void LoginButton_Clicked(object sender, EventArgs e)
-        {
-            var canLogin = User.Login(user);
-
-            if (canLogin)
-                Navigation.PushAsync(new HomePage());
-            else
-            {
-                DisplayAlert("Login error", "Check your credentials and try again", "Ok");
-                user.Password = string.Empty;
-            }
-                
+            viewModel = new MainViewModel();
+            BindingContext = viewModel;
         }
     }
 }

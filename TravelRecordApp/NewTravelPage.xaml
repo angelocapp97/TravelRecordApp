@@ -7,18 +7,22 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save"
                      IconImageSource="save.png"
-                     Clicked="ToolbarItem_Clicked"/>
+                     Command="{Binding SavePostCommand}"
+                     CommandParameter="{Binding Post}"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout x:Name="containerStackLayout">
             <Entry x:Name="experienceEntry"
-                   Text="{Binding Experience}"
+                   Text="{Binding Experience, Mode=TwoWay}"
                    Placeholder="Write your experience"/>
 
             <ListView x:Name="venueListView"
                       HorizontalOptions="FillAndExpand"
-                      Margin="20,0">
+                      Margin="20,0"
+                      ItemsSource="{Binding Venues}"
+                      SelectedItem="{Binding SelectedVenue, Mode=TwoWay}"
+                      SelectionMode="Single">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
