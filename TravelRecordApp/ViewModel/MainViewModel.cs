@@ -75,7 +75,7 @@ namespace TravelRecordApp.ViewModel
             var canLogin = User.Login(User);
 
             if (canLogin)
-                await Application.Current.MainPage.Navigation.PushAsync(new HomePage());
+                Application.Current.MainPage = new NavigationPage(new HomePage());
             else
             {
                 await Application.Current.MainPage.DisplayAlert("Login error", "Check your credentials and try again", "Ok");
