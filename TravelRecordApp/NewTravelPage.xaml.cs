@@ -10,6 +10,7 @@ namespace TravelRecordApp
 {
     public partial class NewTravelPage : ContentPage
     {
+        Post post;
         public NewTravelPage()
         {
             InitializeComponent();
@@ -18,6 +19,9 @@ namespace TravelRecordApp
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            post = new Post();
+            containerStackLayout.BindingContext = post;
 
             var locator = CrossGeolocator.Current;
             var position = await locator.GetPositionAsync();
@@ -33,17 +37,13 @@ namespace TravelRecordApp
                 var selectedVenue = venueListView.SelectedItem as Venue;
                 var firstCategory = selectedVenue.categories.FirstOrDefault();
 
-                Post post = new Post
-                {
-                    Experience = experienceEntry.Text,
-                    VenueName = selectedVenue.name,
-                    Latitude = selectedVenue.location.lat,
-                    Longitude = selectedVenue.location.lng,
-                    Address = selectedVenue.location.address,
-                    Distance = selectedVenue.location.distance,
-                    CategoryId = firstCategory.id,
-                    CategoryName = firstCategory.name
-                };
+                post.VenueName = selectedVenue.name;
+                post.Latitude = selectedVenue.location.lat;
+                post.Longitude = selectedVenue.location.lng;
+                post.Address = selectedVenue.location.address;
+                post.Distance = selectedVenue.location.distance;
+                post.CategoryId = firstCategory.id;
+                post.CategoryName = firstCategory.name;
 
                 var rows = Post.Insert(post);
 

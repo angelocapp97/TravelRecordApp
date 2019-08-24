@@ -6,12 +6,15 @@
              mc:Ignorable="d"
              x:Class="TravelRecordApp.MainPage">
 
-    <StackLayout VerticalOptions="Center"
+    <StackLayout x:Name="containerStackLayout"
+                 VerticalOptions="Center"
                  Margin="20">
         <Entry x:Name="emailEntry"
+               Text="{Binding Email}"
                Placeholder="Email address"
                Keyboard="Email"/>
         <Entry x:Name="passwordEntry"
+               Text="{Binding Password}"
                Placeholder="Password"
                IsPassword="True"/>
         <Button x:Name="LoginButton"

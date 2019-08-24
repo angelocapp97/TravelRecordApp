@@ -14,23 +14,27 @@ namespace TravelRecordApp
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        User user;
         public MainPage()
         {
             InitializeComponent();
+
+            user = new User();
+            containerStackLayout.BindingContext = user;
         }
 
         private void LoginButton_Clicked(object sender, EventArgs e)
         {
-            var user = new User()
-            {
-                Email = emailEntry.Text,
-                Password = passwordEntry.Text
-            };
+            var canLogin = User.Login(user);
 
-            var loginSuccess = User.Login(user);
-
-            if (loginSuccess)
+            if (canLogin)
                 Navigation.PushAsync(new HomePage());
+            else
+            {
+                DisplayAlert("Login error", "Check your credentials and try again", "Ok");
+                user.Password = string.Empty;
+            }
+                
         }
     }
 }

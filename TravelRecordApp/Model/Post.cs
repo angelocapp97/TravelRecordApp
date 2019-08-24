@@ -1,31 +1,120 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using SQLite;
 
 namespace TravelRecordApp.Model
 {
-    public class Post
+    public class Post : INotifyPropertyChanged
     {
+        private int id;
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
 
+        private string experience;
         [MaxLength(250)]
-        public string Experience { get; set; }
+        public string Experience
+        {
+            get { return experience; }
+            set
+            {
+                experience = value;
+                OnPropertyChanged(nameof(Experience));
+            }
+        }
 
-        public string VenueName { get; set; }
+        private string venueName;
+        public string VenueName
+        {
+            get { return venueName; }
+            set
+            {
+                venueName = value;
+                OnPropertyChanged(nameof(VenueName));
+            }
+        }
 
-        public string CategoryId { get; set; }
+        private string categoryId;
+        public string CategoryId
+        {
+            get { return categoryId; }
+            set
+            {
+                categoryId = value;
+                OnPropertyChanged(nameof(CategoryId));
+            }
+        }
 
-        public string CategoryName { get; set; }
+        private string categoryName;
+        public string CategoryName
+        {
+            get { return categoryName; }
+            set
+            {
+                categoryName = value;
+                OnPropertyChanged(nameof(CategoryName));
+            }
+        }
 
-        public double Latitude { get; set; }
+        private double latitude;
+        public double Latitude
+        {
+            get { return latitude; }
+            set
+            {
+                latitude = value;
+                OnPropertyChanged(nameof(Latitude));
+            }
+        }
 
-        public double Longitude { get; set; }
+        private double longitude;
+        public double Longitude
+        {
+            get { return longitude; }
+            set
+            {
+                longitude = value;
+                OnPropertyChanged(nameof(Longitude));
+            }
+        }
 
-        public string Address { get; set; }
+        private string address;
+        public string Address
+        {
+            get { return address; }
+            set
+            {
+                address = value;
+                OnPropertyChanged(nameof(Address));
+            }
+        }
 
-        public int Distance { get; set; }
+        private int distance;
+        public int Distance
+        {
+            get { return distance; }
+            set
+            {
+                distance = value;
+                OnPropertyChanged(nameof(Distance));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public static List<Post> GetAll()
         {
