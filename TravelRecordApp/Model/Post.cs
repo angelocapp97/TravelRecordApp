@@ -109,6 +109,28 @@ namespace TravelRecordApp.Model
             }
         }
 
+        private DateTimeOffset createdAt;
+        public DateTimeOffset CreatedAt
+        {
+            get { return createdAt; }
+            set
+            {
+                createdAt = value;
+                OnPropertyChanged(nameof(createdAt));
+            }
+        }
+
+        private DateTimeOffset lastUpdate;
+        public DateTimeOffset LastUpdate
+        {
+            get { return lastUpdate; }
+            set
+            {
+                lastUpdate = value;
+                OnPropertyChanged(nameof(LastUpdate));
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
@@ -129,6 +151,9 @@ namespace TravelRecordApp.Model
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
+                post.CreatedAt = DateTimeOffset.Now;
+                post.lastUpdate = DateTimeOffset.Now;
+
                 conn.CreateTable<Post>();
                 return conn.Insert(post);
             }
@@ -138,6 +163,8 @@ namespace TravelRecordApp.Model
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
+                post.LastUpdate = DateTimeOffset.Now;
+
                 conn.CreateTable<Post>();
                 return conn.Update(post);
             }

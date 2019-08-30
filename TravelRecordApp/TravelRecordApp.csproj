@@ -23,5 +23,6 @@
     <Folder Include="Helpers\" />
     <Folder Include="ViewModel\" />
     <Folder Include="ViewModel\Commands\" />
+    <Folder Include="ViewModel\Converters\" />
   </ItemGroup>
 </Project>
