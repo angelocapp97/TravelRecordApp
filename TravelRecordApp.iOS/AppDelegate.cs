@@ -23,6 +23,7 @@ namespace TravelRecordApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            global::Xamarin.Forms.Forms.SetFlags("UseLegacyRenderers");
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();
 
