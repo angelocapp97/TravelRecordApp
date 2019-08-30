@@ -7,6 +7,7 @@
              x:Class="TravelRecordApp.MainPage">
 
     <StackLayout x:Name="containerStackLayout"
+                 CompressedLayout.IsHeadless="True"
                  VerticalOptions="Center"
                  Margin="20">
         <Entry x:Name="emailEntry"
