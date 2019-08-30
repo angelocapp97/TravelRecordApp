@@ -2,23 +2,28 @@
 using System.Collections.Generic;
 using SQLite;
 using TravelRecordApp.Model;
+using TravelRecordApp.ViewModel;
 using Xamarin.Forms;
 
 namespace TravelRecordApp
 {
     public partial class HistoryPage : ContentPage
     {
+        HistoryViewModel viewModel;
+
         public HistoryPage()
         {
             InitializeComponent();
+
+            viewModel = new HistoryViewModel();
+            BindingContext = viewModel;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            var posts = Post.GetAll();
-            postListView.ItemsSource = posts;
+            viewModel.UpdatePosts();
         }
 
         void Handle_ItemSelected(object sender, SelectedItemChangedEventArgs e)
